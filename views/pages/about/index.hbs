@@ -1,0 +1,83 @@
+{{>_header}}
+
+<div id="wrapper">
+    <!-- Sidebar -->
+    {{>_slidebar}}
+    <!-- Sidebar/ -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <!-- navbar -->
+            {{>_navbar}}
+            <!-- navbar/ -->
+
+
+            <!-- form -->
+
+            <div class="container">
+
+                <div id="tableContainer">
+                  
+                     <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+            <thead class="bg-dark text-primary">
+                <tr>
+                    <th scope="col">image</th>
+                    <th scope="col">heading</th>
+                    <th scope="col">description</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each aboutPage}}
+                <tr>
+                    <td class=""> <img src="/img/{{{this.image_file}}}" alt="" style="height: 3rem;width:3rem;"> </td>
+                    <td> {{this.heading}} </td>
+                    <td> {{this.description}} </td>
+                    <td>
+                        <a data-id="{{this.id}}" class="fa fa-edit mx-2 editBtn"></a>
+                    </td>
+                </tr>
+                {{/each}}
+
+            </tbody>
+        </table>
+                </div>
+
+                <div id="actionContainer">
+
+                </div>
+
+            </div>
+            <!-- form/ -->
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function focusAction(controlToFocus) {
+        $('html, body').animate({
+            scrollTop: $("#" + controlToFocus ).offset().top - 10
+        }, 1000);
+    }
+
+    $(".editBtn").click(function () {
+            $.ajax({
+
+                url: `/admin/pages/about/edit?id=${$(this).attr('data-id')}`,
+
+            })
+                .done(function (response) {
+                    $("#actionContainer").html(response);
+
+                    focusAction("actionContainer");
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Fail")
+                });
+        });
+
+</script>
+
+{{>_footer}}

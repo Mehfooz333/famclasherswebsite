@@ -1,0 +1,85 @@
+{{>_header}}
+
+<div class="mb-3 btn-group d-flex justify-content-center" role="group" aria-label="Basic checkbox toggle button group">
+
+
+
+    <button class="btn btn-outline-primary " id="newBtn" type="button">New</button>
+</div>
+<div class="table-responsive">
+    <table id="" class="table ">
+        <thead class="bg-dark text-primary">
+            <tr>
+
+                <th scope="col">image</th>
+                <th scope="col">Name</th>
+                <th scope="col">description</th>
+                <th scope="col">brand url</th>
+                <th scope="col">status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+
+                <td> <img src="/img/{{{this.image_file}}}" alt="" class="img-fluid" style="width:80px ; "> </td>
+                <td> {{this.name}} </td>
+
+                <td> {{this.description}} </td>
+                <td> {{this.brand_url}} </td>
+                <td> {{this.status}} </td>
+                <td>
+                    <a class="fa fa-trash mx-2 deleteBtn"
+                        onclick="return confirm('Are you sure to delete this record ?');"
+                        href="/api/delete/{{this.id}}">
+                    </a>
+
+                    <a data-id="{{this.id}}" class="fa fa-edit mx-2 editBtn"></a>
+                </td>
+            </tr>
+            {{/each}}
+
+        </tbody>
+    </table>
+</div>
+</div>
+
+<script>
+
+
+    $("#newBtn").click(function () {
+        $.ajax({
+
+            url: '/admin/influencer/create',
+
+        })
+            .done(function (response) {
+                $("#actionContainer").html(response);
+
+                focusAction("actionContainer");
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Fail")
+            });
+    });
+
+
+
+    $(".editBtn").click(function () {
+        $.ajax({
+
+            url: `/admin/influencer/edit?id=${$(this).attr('data-id')}`,
+
+        })
+            .done(function (response) {
+                $("#actionContainer").html(response);
+
+                focusAction("actionContainer");
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Fail")
+            });
+    });
+
+</script>

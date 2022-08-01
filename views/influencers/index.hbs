@@ -1,0 +1,45 @@
+{{>_header}}
+
+<div id="wrapper">
+    <!-- Sidebar -->
+    {{>_slidebar}}
+    <!-- Sidebar/ -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <!-- navbar -->
+            {{>_navbar}}
+            <!-- navbar/ -->
+
+
+            <!-- form -->
+
+            <div class="container">
+
+                <div id="tableContainer">
+                  
+                    {{>_influencerTable data = influencer}}
+                </div>
+
+                <div id="actionContainer">
+
+                </div>
+
+            </div>
+            <!-- form/ -->
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function focusAction(controlToFocus) {
+        $('html, body').animate({
+            scrollTop: $("#" + controlToFocus ).offset().top - 10
+        }, 1000);
+    }
+
+</script>
+
+{{>_footer}}

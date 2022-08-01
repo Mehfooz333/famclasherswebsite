@@ -1,0 +1,97 @@
+<style>
+    * {
+        padding: 0%;
+        margin: 0%;
+        box-sizing: border-box;
+    }
+
+    #form ul {
+        list-style: none;
+    }
+
+    #form ul li {
+        margin: 1rem;
+    }
+
+    i {
+        color: red;
+    }
+</style>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-8">
+            <div class="form-inside">
+                <div class="form-head">
+                    <div class="section-head text-center">
+                        <h4 class="sm-title fs-1 ">
+                            Edit Influencer
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="contact-form pt-4">
+                        {{#each data}}
+                        <form class="form-group" id="form" action="/api/change/{{this.id}}" method="POST" class="tab"
+                            enctype="multipart/form-data">
+                            <div class="form-list">
+                                <div class="form-group">
+                                    <label for="name">Name:<i>*</i></label>
+                                    <input required class="form-control" name="name" type="text" placeholder="Name"
+                                        value="{{this.name}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description:<i>*</i></label>
+                                    <input required class="form-control" name="description" type="textarea"
+                                        placeholder="Decribe your brand" value="{{this.description}}">
+                                </div>
+                                <div class="form-group">
+                                     <label for="name">Image:<i>* </i>  <input id="file" required type="file" accept="Image/*" name="image"
+                                        onchange="loadFile(event)" value="{{this.image_file}}"></label>
+                                        <span>H:426px W:640px</span>
+                                </div>
+                                <div class="form-group d-flex align-items-center">
+                                    {{#ifEquals this.status "Active"}}
+                                   <span>Active</span> <input type="radio" id="Active" name="status" checked value="Active"
+                                        class="mx-2"><br>
+                                   <span>Inactive</span> <input type="radio" id="Inactive" name="status" value="Inactive"
+                                        class="mx-2"><br>
+                                    {{else}}
+                                     <span>Active</span> <input type="radio" id="Active" name="status" value="Active" class="mx-2"><br>
+                                   <span>Inactive</span>  <input type="radio" id="Inactive" name="status" checked value="Inactive"
+                                        class="mx-2"><br>
+                                    {{/ifEquals}}
+                                </div>
+                                <button id="add-user" class="btn btn btn-info ml-3 " style="width:100px ;"
+                                    type="submit">Save</button>
+                                <button id="cancelBtn" class="btn btn btn-info ml-3 " style="width:100px ;">Cancel
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 d-flex justify-content-center align-items-center form-group">
+            <img id="output" class="img-fluid img-thumbnail" src="/img/{{this.image_file}}" />
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<script>
+    var loadFile = function (event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
+
+    $("#cancelBtn").click(function () {
+        $("#actionContainer").html("");
+        focusAction("tableContainer");
+    });
+</script>

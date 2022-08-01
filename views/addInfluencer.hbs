@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{tittle}}</title>
+  <link href="/static/images/admin/logo/logo.png" rel="icon">
+  <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="/static/css/admin/ruang-admin.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div id="wrapper">
+    <!-- Sidebar -->
+    {{>_slidebar}}
+    <!-- Sidebar/ -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <!-- navbar -->
+        {{>_navbar}}
+        <!-- navbar/ -->
+
+        <!-- creator list -->
+        {{>_table data=creator}}
+        <!-- creator list/ -->
+
+        <!-- form -->
+        {{>_addform}}
+        <!-- form/ -->
+
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="/static/js/admin/ruang-admin.min.js"></script>
+  <script src="/static/vendor/chart.js/Chart.min.js"></script>
+  <script src="/static/js/admin/demo/chart-area-demo.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+<script src="/static/js/addcreator.js"></script>
+
+ 
+</body>
+
+</html>

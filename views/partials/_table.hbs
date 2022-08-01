@@ -1,0 +1,42 @@
+<style>
+    * {
+        margin: 0%;
+        padding: 0%;
+        box-sizing: border-box;
+    }
+
+    .table {
+        box-shadow: 1px 1px 3px 4px gray;
+    }
+</style>
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">image</th>
+                <th scope="col">Name</th>
+                <th scope="col">description</th>
+                <th scope="col">brand url</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+           {{#each data}}
+            <tr>
+                <td> {{this.length}} </td>
+                <td class=""> <img src="/img/{{{this.image_file}}}" alt="" style="height: 3rem;width:3rem;"> </td>
+                <td> {{this.name}} </td>
+                <td> {{this.description}} </td>
+                <td> {{this.brand_url}} </td>
+                <td>
+                    <a href="/api/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');" class="fa fa-trash mx-2">
+                    </a>
+
+                    <a href="/admin_panel/edit_influencer?id={{this._id}}" class="fa fa-edit mx-2" ></a>
+                </td>
+            </tr>
+           {{/each}}
+        </tbody>
+    </table>
+</div>
